@@ -1,11 +1,17 @@
 let account = {
   accountName: "Spongebob Squarepants",
   balance: 100,
+
   getBalance: function () {
     return this.balance.toString();
   },
+
   deposit: function () {
     while (true) {
+      /*
+       * Using parseFloat method here to assure input can be converted to a number.
+       * If not amount is set to NaN and an error message is shown.
+       */
       let amount = parseFloat(prompt(`Input deposit amount:`));
       if (isNaN(amount) || amount <= 0) {
         this.accountError(`Incorrect deposit amount!`);
@@ -15,8 +21,13 @@ let account = {
       }
     }
   },
+
   withdrawal: function () {
     while (true) {
+      /*
+       * Using parseFloat method here to assure input can be converted to a number.
+       * If not amount is set to NaN and an error message is shown.
+       */
       let amount = parseFloat(prompt(`Input withdrawal amount:`));
       if (isNaN(amount) || amount <= 0 || amount > this.balance) {
         this.accountError(`Incorrect withdrawal amount!`);
@@ -29,9 +40,18 @@ let account = {
   getAccountName: function () {
     return this.accountName;
   },
+
+  /*
+   * accountError function is used for displaying error messages to the user.
+   * 'Message' argument allows it to be flexible and adapt the error text to the situation.
+   * This function is used in these places where an error could occur due to incorrect input from the user
+   * e.g. in deposit & withdrawal functions where user is asked to input amount as well as in main menu where user
+   * can pick an incorrect option.
+   */
   accountError: function (message) {
     alert(message);
   },
+
   exitAccount: function () {
     return false;
   },
