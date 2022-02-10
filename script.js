@@ -3,40 +3,37 @@ let account = {
   balance: 100,
 
   getBalance: function () {
-    return this.balance.toString();
+    return `${this.balance}`;
   },
 
   deposit: function () {
-    while (true) {
-      /*
-       * Using parseFloat method here to assure input can be converted to a number.
-       * If not amount is set to NaN and an error message is shown.
-       */
-      let amount = parseFloat(prompt(`Input deposit amount:`));
-      if (isNaN(amount) || amount <= 0) {
-        this.accountError(`Incorrect deposit amount!`);
-      } else {
-        this.balance += amount;
-        break;
-      }
+    /*
+     * Using parseFloat method here to assure input can be converted to a number.
+     * If not amount is set to NaN and an error message is shown.
+     */
+    let amount = parseFloat(prompt(`Input deposit amount:`));
+    if (isNaN(amount) || amount <= 0) {
+      this.accountError(`Incorrect deposit amount!`);
+      this.deposit();
+    } else {
+      this.balance += amount;
     }
   },
 
   withdrawal: function () {
-    while (true) {
-      /*
-       * Using parseFloat method here to assure input can be converted to a number.
-       * If not amount is set to NaN and an error message is shown.
-       */
-      let amount = parseFloat(prompt(`Input withdrawal amount:`));
-      if (isNaN(amount) || amount <= 0 || amount > this.balance) {
-        this.accountError(`Incorrect withdrawal amount!`);
-      } else {
-        this.balance -= amount;
-        break;
-      }
+    /*
+     * Using parseFloat method here to assure input can be converted to a number.
+     * If not amount is set to NaN and an error message is shown.
+     */
+    let amount = parseFloat(prompt(`Input withdrawal amount:`));
+    if (isNaN(amount) || amount <= 0 || amount > this.balance) {
+      this.accountError(`Incorrect withdrawal amount!`);
+      this.withdrawal();
+    } else {
+      this.balance -= amount;
     }
   },
+
   getAccountName: function () {
     return this.accountName;
   },
